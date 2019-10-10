@@ -62,9 +62,6 @@ const Menu = () => {
             {getListMenu()}
           </ListMenu>
         </BoxContentMenu>
-        {/* <img src="/static/movedb.png" alt="movie db" />
-        <a href="/html/">HTML</a> |<a href="/css/">CSS</a> |
-        <a href="/js/">JavaScript</a> |<a href="/jquery/">jQuery</a> */}
       </HeaderContent>
     </MenuContent>
   );
