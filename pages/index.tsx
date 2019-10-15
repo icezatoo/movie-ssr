@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Page from '../layouts/main';
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
+import Page from '../layouts';
+import { getMovieUpcoming } from '../services';
 
 const HomeContainer = styled.div`
   display: grid;
@@ -50,5 +45,10 @@ const Home = () => (
     </HomeContainer>
   </Page>
 );
+
+Home.getInitialProps = async function() {
+  const movieData = await getMovieUpcoming();
+  return movieData;
+};
 
 export default Home;

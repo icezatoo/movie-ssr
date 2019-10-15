@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { menuList } from '../common/unity';
 
 const MenuContent = styled.div`
@@ -32,6 +33,11 @@ const ListMenuItem = styled.li`
   margin-right: 2rem;
   cursor: pointer;
   font-weight: 600;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
 const LogoBar = styled.div`
@@ -46,7 +52,11 @@ const LogoBar = styled.div`
 
 const getListMenu = () => {
   return menuList.map((val, index) => (
-    <ListMenuItem key={index}>{val.label}</ListMenuItem>
+    <ListMenuItem key={index}>
+      <Link href={val.path}>
+        <a>{val.label}</a>
+      </Link>
+    </ListMenuItem>
   ));
 };
 
@@ -57,7 +67,9 @@ const Menu = () => {
         <BoxContentMenu>
           <ListMenu>
             <ListMenuItem>
-              <LogoBar />
+              <Link href="/">
+                <LogoBar />
+              </Link>
             </ListMenuItem>
             {getListMenu()}
           </ListMenu>
