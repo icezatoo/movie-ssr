@@ -9,6 +9,7 @@ const MenuContent = styled.div`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 10;
 `;
 const HeaderContent = styled.header`
   background-color: #081c24;

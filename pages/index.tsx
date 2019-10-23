@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SlickContainerLayout from '../components/slick/slickShow';
 import Page from '../layouts';
 import { getMovieUpcoming } from '../services';
 
@@ -14,7 +15,7 @@ const HomeContainer = styled.div`
 `;
 
 const SlickContainer = styled.div`
-  height: 200px;
+  height: 300px;
   grid-area: slick;
   background-color: red;
 `;
@@ -38,7 +39,9 @@ const UpcomingContainer = styled.div`
 const Home = () => (
   <Page>
     <HomeContainer>
-      <SlickContainer>Slick</SlickContainer>
+      <SlickContainer>
+        <SlickContainerLayout></SlickContainerLayout>
+      </SlickContainer>
       <PopularContainer>popular</PopularContainer>
       <TopRatedContainer>top_rated</TopRatedContainer>
       <UpcomingContainer>upcoming</UpcomingContainer>
