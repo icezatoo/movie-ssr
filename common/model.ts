@@ -16,3 +16,8 @@ export interface CommonAPI<T> {
   dates: Dates;
   total_pages: number;
 }
+
+export interface ISlickModel {
+  path: string;
+  data: any;
+}

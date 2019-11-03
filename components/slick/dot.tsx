@@ -6,8 +6,12 @@ const DotLayout = styled.div`
   height: 10px;
   border-radius: 5px;
   background: white;
+  margin: 0 10px;
+  cursor: pointer;
 `;
 
-const Dot = () => <DotLayout></DotLayout>;
+const Dot = ({ onClick, index }) => (
+  <DotLayout onClick={() => onClick(index)}></DotLayout>
+);
 
 export default Dot;

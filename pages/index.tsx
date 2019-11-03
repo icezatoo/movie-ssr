@@ -6,8 +6,8 @@ import { getMovieUpcoming } from '../services';
 
 const HomeContainer = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 450px auto;
   grid-template-areas:
     'slick slick slick'
     'popular popular top_rated'
@@ -15,7 +15,6 @@ const HomeContainer = styled.div`
 `;
 
 const SlickContainer = styled.div`
-  height: 300px;
   grid-area: slick;
   background-color: red;
 `;

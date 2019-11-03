@@ -3,22 +3,19 @@ import styled from 'styled-components';
 
 const MainImageContainerSlick = styled.div`
   width: 100%;
-  position: absolute;
+  left: ${props => props.offScreen}vw;
 `;
 
-const Slick = () => (
+const Slick = ({ offScreen = 0, path }) => (
   <>
-    <MainImageContainerSlick>
-      <img
-        className="image"
-        height="300"
-        src="https://picsum.photos/id/1018/1500/300/"
-      />
+    <MainImageContainerSlick offScreen={offScreen}>
+      <img src={path} />
     </MainImageContainerSlick>
     <style jsx>
       {`
-        .image {
+        img {
           width: 100%;
+          height: 100%;
           object-fit: cover;
         }
       `}
