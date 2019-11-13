@@ -1,15 +1,20 @@
-const webpack = require('webpack');
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
+const webpack = require("webpack")
+const withSass = require("@zeit/next-sass")
+const withCSS = require("@zeit/next-css")
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin")
 
 module.exports = withCSS(
   withSass({
     webpack: config => {
-      // Fixes npm packages that depend on `fs` module
+      if (config.resolve.plugins) {
+        config.resolve.plugins.push(new TsconfigPathsPlugin())
+      } else {
+        config.resolve.plugins = [new TsconfigPathsPlugin()]
+      }
       config.node = {
-        fs: 'empty'
-      };
-      return config;
-    }
+        fs: "empty",
+      }
+      return config
+    },
   })
-);
+)

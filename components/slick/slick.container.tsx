@@ -1,20 +1,8 @@
 import React, { useState } from "react"
 import { useTransition, animated, config } from "react-spring"
 import styled from "styled-components"
-import { ISlickModel } from "../../common"
-import { useInterval } from "../../custom/useInterval"
-import Dot from "./dot"
-
-const MainDotContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 50px;
-`
+import { ISlickModel } from "common"
+import { useInterval } from "custom/useInterval"
 
 const MainSlickLayout = styled.div`
   width: 100%;
@@ -68,16 +56,11 @@ const SlickContainer = () => {
     }
   }, 3000)
 
-  const renderDots = () => {
-    return image.map((val, index) => <Dot key={index} activeImage={activeImage === index}></Dot>)
-  }
-
   return (
     <MainSlickLayout>
       {transitions.map(({ item, props, key }) => (
         <AnimatedWallpaper key={key} style={{ ...props, backgroundImage: `url(${item.path})` }} />
       ))}
-      <MainDotContainer>{renderDots()}</MainDotContainer>
     </MainSlickLayout>
   )
 }
