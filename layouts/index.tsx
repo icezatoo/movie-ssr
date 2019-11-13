@@ -1,6 +1,7 @@
-import React from 'react';
-import Header from './header';
-import Menu from './menu';
+import React from "react"
+import Header from "./header"
+import Menu from "./menu"
+import "../styles/style.scss"
 
 export default ({ children }) => (
   <>
@@ -8,4 +9,4 @@ export default ({ children }) => (
     <Menu />
     {children}
   </>
-);
+)

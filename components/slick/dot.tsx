@@ -1,13 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react"
+import styled from "styled-components"
 
 const DotLayout = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background: white;
-`;
+  background: ${props => (props.activeImage ? "white" : "black")};
+  margin: 0 10px;
+`
 
-const Dot = () => <DotLayout></DotLayout>;
+const Dot = ({ activeImage }) => <DotLayout activeImage={activeImage}></DotLayout>
 
-export default Dot;
+export default Dot
