@@ -1,8 +1,8 @@
-import { MenuList } from './model';
+import { MenuList } from '../common/model';
 
 export const menuList: MenuList[] = [
-  { label: 'Movie', active: false, path: 'movie' },
-  { label: 'TV shows', active: false, path: 'tv' }
+	{ label: 'Movie', active: false, path: 'movie' },
+	{ label: 'TV shows', active: false, path: 'tv' }
 ];
 
 export const apiEndPoint: string = 'https://api.themoviedb.org/3';

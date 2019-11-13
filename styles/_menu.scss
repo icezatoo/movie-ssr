@@ -1,0 +1,38 @@
+.menu-content {
+  width: 100%;
+  height: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #081c24;
+
+  .box-content-menu {
+    display: flex;
+    align-items: center;
+    will-change: height;
+    margin: 0px auto;
+    max-width: 60%;
+
+    .list-menu {
+     display: flex;
+     width: 100%;
+     align-items: center;
+     list-style-type: none;
+
+     .list-menu-item {
+        color: white;
+        margin-right: 2rem;
+        cursor: pointer;
+        font-weight: 600;
+      
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      } 
+    }
+  }
+}
+
+

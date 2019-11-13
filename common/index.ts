@@ -1,2 +1,2 @@
 export * from './model';
-export * from './unity';
+export * from '../constants/unity';
