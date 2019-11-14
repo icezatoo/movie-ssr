@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import Link from "next/link"
-import { menuList } from "../constants/unity"
-import "../styles/_menu.scss"
+import { menuList } from "constant"
+import "styles/_menu.scss"
 
 const LogoBar = styled.div`
   min-width: 100px;
