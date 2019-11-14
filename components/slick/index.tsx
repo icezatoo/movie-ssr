@@ -21,27 +21,9 @@ const AnimatedWallpaper = styled(animated.div)`
   background-position: 50% 50%;
 `
 
-const image: ISlickModel[] = [
-  {
-    id: 0,
-    path: "https://c.wallhere.com/photos/47/66/Star_Wars_The_Last_Jedi_movies_poster_movie_poster-1201860.jpg!d",
-    data: "test",
-  },
-  {
-    id: 1,
-    path: "https://images5.alphacoders.com/881/thumb-1920-881633.jpg",
-    data: "test",
-  },
-  {
-    id: 2,
-    path: "https://images7.alphacoders.com/882/thumb-1920-882297.jpg",
-    data: "test",
-  },
-]
-
-const SlickContainer = () => {
+const SlickContainer = ({ images }) => {
   const [activeImage, setActiveImage] = useState(0)
-  const transitions = useTransition(image[activeImage], item => item.id, {
+  const transitions = useTransition(images[activeImage], item => item.id, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -49,7 +31,7 @@ const SlickContainer = () => {
   })
 
   useInterval(() => {
-    if (image.length - 1 === activeImage) {
+    if (images.length - 1 === activeImage) {
       setActiveImage(0)
     } else {
       setActiveImage(activeImage + 1)
