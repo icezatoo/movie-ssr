@@ -1,7 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useTransition, animated, config } from "react-spring"
 import styled from "styled-components"
-import { ISlickModel } from "common"
 import { useInterval } from "custom/useInterval"
 
 const MainSlickLayout = styled.div`
@@ -18,25 +17,23 @@ const AnimatedWallpaper = styled(animated.div)`
   background-size: cover;
   background-repeat: no-repeat;
   will-change: opacity;
-  background-position: 50% 50%;
+  background-position: left top;
+  z-index: 1;
 `
 
 const SlickContainer = ({ images }) => {
   const [activeImage, setActiveImage] = useState(0)
+
+  useInterval(() => {
+    setActiveImage(state => (state + 1) % 10)
+  }, 3000)
+
   const transitions = useTransition(images[activeImage], item => item.id, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
     config: config.molasses,
   })
-
-  useInterval(() => {
-    if (images.length - 1 === activeImage) {
-      setActiveImage(0)
-    } else {
-      setActiveImage(activeImage + 1)
-    }
-  }, 3000)
 
   return (
     <MainSlickLayout>

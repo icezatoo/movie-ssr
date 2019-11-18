@@ -1,15 +1,17 @@
 import React from "react"
 import styled from "styled-components"
-import useFetcher from "custom/useFetch"
 import { getCombineTrendingMovieAndTv } from "services"
 import Slick from "components/slick"
 import BannerAds from "components/slick/BannerAds"
+import HeaderTitle from "components/header-title"
 import Page from "layouts"
 
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 500px 500px auto;
+  grid-template-rows: 580px 500px auto;
+  grid-row-gap: 15px;
+  grid-column-gap: 10px;
   grid-template-areas:
     "slick slick slick"
     "popular popular top_rated"
@@ -35,19 +37,28 @@ const UpcomingContainer = styled.div`
   background-color: coral;
 `
 
-const Home = () => {
-  const { response, error } = useFetcher(getCombineTrendingMovieAndTv)
-
+const Home = ({ responseTrend }) => {
   return (
     <Page>
       <HomeContainer>
-        <SlickGridArea>{response ? <Slick images={response}></Slick> : <BannerAds />}</SlickGridArea>
-        <PopularContainer>popular</PopularContainer>
-        <TopRatedContainer>top_rated</TopRatedContainer>
-        <UpcomingContainer>upcoming</UpcomingContainer>
+        <SlickGridArea>{responseTrend ? <Slick images={responseTrend}></Slick> : <BannerAds />}</SlickGridArea>
+        <PopularContainer>
+          <HeaderTitle title="Popular" />
+        </PopularContainer>
+        <TopRatedContainer>
+          <HeaderTitle title="TopRated" />
+        </TopRatedContainer>
+        <UpcomingContainer>
+          <HeaderTitle title="Upcoming" />
+        </UpcomingContainer>
       </HomeContainer>
     </Page>
   )
+}
+
+Home.getInitialProps = async function() {
+  const responseTrend = await getCombineTrendingMovieAndTv()
+  return { responseTrend }
 }
 
 export default Home

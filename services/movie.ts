@@ -27,6 +27,7 @@ export interface MovieTrending {
   poster_path: string
   genre_ids: number[]
   original_language: string
+  original_title?: string
   backdrop_path: string
   overview: string
   origin_country: string[]

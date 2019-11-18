@@ -7,3 +7,5 @@ export const menuList: MenuList[] = [
 
 export const apiEndPoint: string = "https://api.themoviedb.org/3"
 export const apiKey: string = "545355355a5f3d21e30cf2751d3ac464"
+
+export const imageEndPoint: string = "https://image.tmdb.org/t/p"
