@@ -1,6 +1,6 @@
 import axios from "axios"
 import { CommonAPI } from "common"
-import { apiEndPoint, apiKey } from "constant"
+import { apiEndPoint, apiKey, imageEndPoint } from "constant"
 import { MovieUpcoming, MediaType, MovieTrending } from "./movie"
 
 export const getMovieUpcoming = async (page = 1) => {
@@ -19,13 +19,15 @@ export const getCombineTrendingMovieAndTv = async () => {
       .filter((_, index) => index < 5)
       .map(val => ({
         ...val,
-        path: `https://image.tmdb.org/t/p/original${val.backdrop_path}`,
+        path: `${imageEndPoint}/original${val.backdrop_path}`,
+        name: val.original_title,
       }))
     const tvList = tv.data.results
       .filter((_, index) => index < 5)
       .map(val => ({
         ...val,
-        path: `https://image.tmdb.org/t/p/original${val.backdrop_path}`,
+        path: `${imageEndPoint}/original${val.backdrop_path}`,
+        name: val.original_name,
       }))
 
     return [...movieList, ...tvList]
