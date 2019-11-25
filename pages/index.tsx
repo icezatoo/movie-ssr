@@ -1,20 +1,22 @@
-import React from "react"
-import styled from "styled-components"
-import { getCombineTrendingMovieAndTv } from "services"
-import Slick from "components/slick"
-import BannerAds from "components/slick/BannerAds"
-import HeaderTitle from "components/header-title"
+import { isEmpty } from "common"
+import Banner from "components/banner"
+import BannerAds from "components/banner/BannerAds"
+import Loading from "components/loader"
+import Movie from "components/movie"
 import Page from "layouts"
+import React from "react"
+import { getCombineTrendingMovieAndTv, getMoviePopular, getMovieUpcoming } from "services"
+import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick.css"
+import styled from "styled-components"
 
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 580px 500px auto;
-  grid-row-gap: 15px;
-  grid-column-gap: 10px;
+  grid-template-rows: 580px auto auto;
   grid-template-areas:
     "slick slick slick"
-    "popular popular top_rated"
+    "movie movie movie"
     "upcoming upcoming top_rated";
 `
 
@@ -22,35 +24,24 @@ const SlickGridArea = styled.div`
   grid-area: slick;
 `
 
-const PopularContainer = styled.div`
-  grid-area: popular;
-  background-color: green;
+const MovieContainer = styled.div`
+  grid-area: movie;
+  padding: 20px;
 `
 
-const TopRatedContainer = styled.div`
-  grid-area: top_rated;
-  background-color: blue;
-`
+const Home = ({ responseTrend, popular, upcomings }) => {
+  const renderMovie = () => {
+    if (!isEmpty(popular) && !isEmpty(upcomings)) {
+      return <Movie popular={popular} upcomings={upcomings}></Movie>
+    }
+    return <Loading />
+  }
 
-const UpcomingContainer = styled.div`
-  grid-area: upcoming;
-  background-color: coral;
-`
-
-const Home = ({ responseTrend }) => {
   return (
     <Page>
       <HomeContainer>
-        <SlickGridArea>{responseTrend ? <Slick images={responseTrend}></Slick> : <BannerAds />}</SlickGridArea>
-        <PopularContainer>
-          <HeaderTitle title="Popular" />
-        </PopularContainer>
-        <TopRatedContainer>
-          <HeaderTitle title="TopRated" />
-        </TopRatedContainer>
-        <UpcomingContainer>
-          <HeaderTitle title="Upcoming" />
-        </UpcomingContainer>
+        <SlickGridArea>{responseTrend ? <Banner images={responseTrend}></Banner> : <BannerAds />}</SlickGridArea>
+        <MovieContainer>{renderMovie()}</MovieContainer>
       </HomeContainer>
     </Page>
   )
@@ -58,7 +49,9 @@ const Home = ({ responseTrend }) => {
 
 Home.getInitialProps = async function() {
   const responseTrend = await getCombineTrendingMovieAndTv()
-  return { responseTrend }
+  const responsePopular = await getMoviePopular()
+  const responseUpcoming = await getMovieUpcoming()
+  return { responseTrend, popular: responsePopular.results, upcomings: responseUpcoming.results }
 }
 
 export default Home

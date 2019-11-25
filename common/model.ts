@@ -22,3 +22,9 @@ export interface ISlickModel {
   path: string
   data: any
 }
+
+export interface ITabModel {
+  label: string
+  icon?: string
+  key: string | number
+}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
-import { useTransition, animated, config } from "react-spring"
-import styled from "styled-components"
 import { useInterval } from "custom/useInterval"
+import React, { useState } from "react"
+import { animated, config, useTransition } from "react-spring"
+import styled from "styled-components"
 
 const MainSlickLayout = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ const AnimatedWallpaper = styled(animated.div)`
   z-index: 1;
 `
 
-const SlickContainer = ({ images }) => {
+const BannerContainer = ({ images }) => {
   const [activeImage, setActiveImage] = useState(0)
 
   useInterval(() => {
@@ -44,4 +44,4 @@ const SlickContainer = ({ images }) => {
   )
 }
 
-export default SlickContainer
+export default BannerContainer

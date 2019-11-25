@@ -30,7 +30,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet" />
+        </Head>
         <body>
           <Main />
           <NextScript />

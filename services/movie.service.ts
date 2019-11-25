@@ -1,12 +1,18 @@
 import axios from "axios"
 import { CommonAPI } from "common"
 import { apiEndPoint, apiKey, imageEndPoint } from "constant"
-import { MovieUpcoming, MediaType, MovieTrending } from "./movie"
+import { MovieUpcoming, MediaType, MovieTrending, Movie } from "./movie"
 
 export const getMovieUpcoming = async (page = 1) => {
-  return await axios.get<CommonAPI<MovieUpcoming>>(
-    `${apiEndPoint}/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}`
-  )
+  return await axios
+    .get<CommonAPI<MovieUpcoming>>(`${apiEndPoint}/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}`)
+    .then(response => response.data)
+}
+
+export const getMoviePopular = async (page = 1) => {
+  return await axios
+    .get<CommonAPI<Movie>>(`${apiEndPoint}/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`)
+    .then(response => response.data)
 }
 
 export const getTrending = async (mediaType: MediaType = "all", time: string = "day") => {
@@ -22,6 +28,7 @@ export const getCombineTrendingMovieAndTv = async () => {
         path: `${imageEndPoint}/original${val.backdrop_path}`,
         name: val.original_title,
       }))
+
     const tvList = tv.data.results
       .filter((_, index) => index < 5)
       .map(val => ({
