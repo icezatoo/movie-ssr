@@ -1,6 +1,6 @@
 html,
 body {
- font-family: 'Open Sans', 'Roboto Regular', sans-serif;
+ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
  padding: 0;
  margin: 0;
  width: 100%;
@@ -8,7 +8,11 @@ body {
  min-height: 100vh;
  font-weight: 400;
  font-size: 14px;
- font-style: normal;
  line-height: 19px;
+ color : white;
+ user-select: none;
+ cursor: default;
+ -webkit-font-smoothing: antialiased;
+ background: #141414;
 }
 
