@@ -5,7 +5,7 @@ import Loading from "components/loader"
 import Movie from "components/movie"
 import Page from "layouts"
 import React from "react"
-import { getCombineTrendingMovieAndTv, getMoviePopular, getMovieUpcoming } from "services"
+import { getCombineTrendingMovieAndTv, getMoviePopular, getMovieUpcoming, MovieCard, MovieModel } from "services"
 import "slick-carousel/slick/slick-theme.css"
 import "slick-carousel/slick/slick.css"
 import styled from "styled-components"
@@ -51,7 +51,15 @@ Home.getInitialProps = async function() {
   const responseTrend = await getCombineTrendingMovieAndTv()
   const responsePopular = await getMoviePopular()
   const responseUpcoming = await getMovieUpcoming()
-  return { responseTrend, popular: responsePopular.results, upcomings: responseUpcoming.results }
+  return {
+    responseTrend,
+    popular: mapMovieData(responsePopular.results),
+    upcomings: mapMovieData(responseUpcoming.results),
+  }
+}
+
+const mapMovieData = (data: MovieModel[]): MovieCard[] => {
+  return data.map(val => ({ ...val, original_name: val.original_title }))
 }
 
 export default Home

@@ -1,22 +1,5 @@
 export type MediaType = "all" | "movie" | "tv" | "person"
 
-export interface MovieUpcoming {
-  popularity: number
-  vote_count: number
-  video: boolean
-  poster_path: string
-  id: number
-  adult: boolean
-  backdrop_path: string
-  original_language: string
-  original_title: string
-  genre_ids: number[]
-  title: string
-  vote_average: number
-  overview: string
-  release_date: string
-}
-
 export interface MovieTrending {
   original_name: string
   id: number
@@ -27,7 +10,7 @@ export interface MovieTrending {
   poster_path: string
   genre_ids: number[]
   original_language: string
-  original_title?: string
+  original_title: string
   backdrop_path: string
   overview: string
   origin_country: string[]
@@ -35,8 +18,26 @@ export interface MovieTrending {
   media_type: string
 }
 
-export interface Movie {
+export interface MovieModel {
   poster_path: string
+  adult: boolean
+  overview: string
+  release_date: string
+  genre_ids: number[]
+  id: number
+  original_title: string
+  original_language: string
+  title: string
+  backdrop_path: string
+  popularity: number
+  vote_count: number
+  video: boolean
+  vote_average: number
+}
+
+export interface MovieCard {
+  poster_path: string
+  original_name: string
   adult: boolean
   overview: string
   release_date: string
