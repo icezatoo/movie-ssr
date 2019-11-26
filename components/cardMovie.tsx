@@ -1,8 +1,7 @@
 import ImagePoster from "components/imagePoster"
 import React from "react"
 import { MovieCard } from "services"
-import styled, { css } from "styled-components"
-
+import styled from "styled-components"
 type CardMovieProps = { movie: MovieCard }
 
 const CardMovieContent = styled.div`
@@ -38,18 +37,16 @@ const CardMovie = ({ movie }: CardMovieProps) => {
   return (
     <CardMovieContent>
       <CardMovieImage>
-        <ImagePoster alt={movie.title} path={movie.poster_path} />
+        <ImagePoster alt={movie.original_name} path={movie.poster_path} />
       </CardMovieImage>
-      <div>
-        <Title title={movie.original_name}>{movie.original_name}</Title>
-        <CardDetail>
-          <span>{movie.release_date}</span>
-          <BoxIcon>
-            <i className="fas fa-star"></i>
-            <AverageTitle>{movie.vote_average}</AverageTitle>
-          </BoxIcon>
-        </CardDetail>
-      </div>
+      <Title title={movie.original_name}>{movie.original_name}</Title>
+      <CardDetail>
+        <span>{movie.date}</span>
+        <BoxIcon>
+          <i className="fas fa-star"></i>
+          <AverageTitle>{movie.vote_average}</AverageTitle>
+        </BoxIcon>
+      </CardDetail>
     </CardMovieContent>
   )
 }

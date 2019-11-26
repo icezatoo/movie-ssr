@@ -1,11 +1,11 @@
 import { ITabModel } from "common"
 import Tabs from "components/tab"
 import React, { useEffect, useState } from "react"
-import { MovieModel } from "services"
+import { IMovie } from "services"
 import styled from "styled-components"
 import MovieSlick from "./movieSlick"
 
-type MovieProps = { popular: MovieModel[]; upcomings: MovieModel[] }
+type MovieProps = { popular: IMovie[]; upcomings: IMovie[] }
 
 const TitleMovie = styled.h2`
   display: inline-block;
@@ -21,7 +21,7 @@ const tabList: ITabModel[] = [
   { label: "Upcoming", icon: "far fa-clock", key: 2 },
 ]
 
-const MovieContainer = ({ popular, upcomings }: MovieProps) => {
+const MovieSection = ({ popular, upcomings }: MovieProps) => {
   const [previousTab, setPreviousTab] = useState(0)
   const [movieList, setmovieList] = useState([])
 
@@ -52,4 +52,4 @@ const MovieContainer = ({ popular, upcomings }: MovieProps) => {
   )
 }
 
-export default MovieContainer
+export default MovieSection
