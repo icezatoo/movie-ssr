@@ -9,7 +9,7 @@ const Tab = styled.div.attrs({
   display: inline-block;
   cursor: pointer;
   padding: 1em;
-  width: 25rem;
+  // width: 40%;
   text-align: center;
   &:focus {
     outline: none;

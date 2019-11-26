@@ -1,28 +1,27 @@
 import { ITabModel } from "common"
 import Tabs from "components/tab"
 import React, { useEffect, useState } from "react"
-import { Movie } from "services"
+import { IMovie } from "services"
 import styled from "styled-components"
 import MovieSlick from "./movieSlick"
 
-type MovieProps = { popular: Movie[]; upcomings: Movie[] }
+type MovieProps = { popular: IMovie[]; upcomings: IMovie[] }
 
-const TabContainer = styled.div`
-  margin: 30px auto;
-  width: 60%;
+const TitleMovie = styled.h2`
+  display: inline-block;
+  margin: 0 1em;
 `
 
-const MovieMainContent = styled.div`
-  width: 95%;
-  margin: auto;
+const BoxHeaderTitle = styled.div`
+margin 2em 0;
 `
 
 const tabList: ITabModel[] = [
-  { label: "Popular", icon: "fas fa-film", key: 1 },
-  { label: "Upcoming", icon: "fas fa-film", key: 2 },
+  { label: "Popular", icon: "far fa-star", key: 1 },
+  { label: "Upcoming", icon: "far fa-clock", key: 2 },
 ]
 
-const MovieContainer = ({ popular, upcomings }: MovieProps) => {
+const MovieSection = ({ popular, upcomings }: MovieProps) => {
   const [previousTab, setPreviousTab] = useState(0)
   const [movieList, setmovieList] = useState([])
 
@@ -42,14 +41,15 @@ const MovieContainer = ({ popular, upcomings }: MovieProps) => {
 
   return (
     <>
-      <TabContainer>
-        <Tabs items={tabList} currentTab={previousTab} onChange={setPreviousTab}></Tabs>
-      </TabContainer>
-      <MovieMainContent>
+      <div className="container">
+        <BoxHeaderTitle>
+          <TitleMovie>Movie</TitleMovie>
+          <Tabs items={tabList} currentTab={previousTab} onChange={setPreviousTab}></Tabs>
+        </BoxHeaderTitle>
         <MovieSlick movieList={movieList} />
-      </MovieMainContent>
+      </div>
     </>
   )
 }
 
-export default MovieContainer
+export default MovieSection

@@ -14,18 +14,28 @@ export const settings = {
   dots: false,
   infinite: true,
   lazyLoad: true,
-  speed: 500,
-  slidesToShow: 6,
-  slidesToScroll: 6,
+  speed: 1000,
+  slidesToShow: 5,
+  slidesToScroll: 1,
   initialSlide: 0,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  cssEase: "linear",
   responsive: [
+    {
+      breakpoint: 1440,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        initialSlide: 0,
+      },
+    },
     {
       breakpoint: 1024,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true,
+        slidesToScroll: 1,
+        initialSlide: 0,
       },
     },
     {
