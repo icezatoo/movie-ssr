@@ -3,7 +3,7 @@ import Tabs from "components/tab"
 import React, { useEffect, useState } from "react"
 import { IMovie } from "services"
 import styled from "styled-components"
-import MovieSlick from "./movieSlick"
+import MovieSlick from "../movieSlick"
 
 type MovieProps = { popular: IMovie[]; upcomings: IMovie[] }
 

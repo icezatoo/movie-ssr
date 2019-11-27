@@ -1,6 +1,6 @@
 export type MediaType = "all" | "movie" | "tv" | "person"
 
-export interface MovieTrending {
+export interface IMovieTrending {
   original_name: string
   id: number
   name: string
@@ -16,6 +16,23 @@ export interface MovieTrending {
   origin_country: string[]
   popularity: number
   media_type: string
+  release_date?: string
+}
+
+export interface IMovieTv {
+  poster_path: string
+  popularity: number
+  id: number
+  backdrop_path: string
+  vote_average: number
+  overview: string
+  first_air_date: string
+  origin_country: string[]
+  genre_ids: number[]
+  original_language: string
+  vote_count: number
+  name: string
+  original_name: string
 }
 
 export interface IMovie {
@@ -33,22 +50,6 @@ export interface IMovie {
   vote_count: number
   video: boolean
   vote_average: number
-}
-
-export interface IMovieTv {
-  poster_path: string
-  popularity: number
-  id: number
-  backdrop_path: string
-  vote_average: number
-  overview: string
-  first_air_date: string
-  origin_country: string[]
-  genre_ids: number[]
-  original_language: string
-  vote_count: number
-  name: string
-  original_name: string
 }
 
 export interface MovieCard {

@@ -1,39 +1,45 @@
 import { isEmpty } from "common"
-import Banner from "components/banner"
-import BannerAds from "components/banner/BannerAds"
 import Loading from "components/loader"
 import Movie from "components/movie"
+import SlickSection from "components/Slick"
 import Page from "layouts"
 import React from "react"
 import {
-  getCombineTrendingMovieAndTv,
   getMoviePopular,
-  getMovieUpcoming,
-  MovieCard,
-  IMovie,
-  IMovieTv,
   getMovieTvOnAir,
   getMovieTvPopular,
+  getMovieUpcoming,
+  getTrending,
+  IMovie,
+  IMovieTrending,
+  IMovieTv,
+  MovieCard,
 } from "services"
 import "slick-carousel/slick/slick-theme.css"
 import "slick-carousel/slick/slick.css"
 import styled from "styled-components"
-import TvSection from "components/tv"
 
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 580px auto auto;
   grid-template-areas:
-    "slick slick slick"
+    "trend trend trend"
     "movie movie movie"
+    "trendTV trendTV trendTV"
     "tvonair tvonair tvonair"
     "tvpopular tvpopular tvpopular";
 `
 
-const SlickGridArea = styled.div`
-  grid-area: slick;
+const TrendGridArea = styled.div`
+  grid-area: trend;
+  padding: 20px;
 `
+
+const TrendTvGridArea = styled.div`
+  grid-area: trendTV;
+  padding: 20px;
+`
+
 const MovieGridArea = styled.div`
   grid-area: movie;
   padding: 20px;
@@ -49,19 +55,24 @@ const TvOnairGridArea = styled.div`
   padding: 20px;
 `
 
-const Home = ({ responseTrend, popular, upcomings, tvOnAir, tvpopular }) => {
+const Home = ({ trendMovie, trendTV, popular, upcomings, tvOnAir, tvpopular }) => {
   return (
     <Page>
       <HomeContainer>
-        <SlickGridArea>{responseTrend ? <Banner images={responseTrend}></Banner> : <BannerAds />}</SlickGridArea>
+        <TrendGridArea>
+          <SlickSection title="Trend Movie now" list={trendMovie}></SlickSection>
+        </TrendGridArea>
+        <TrendTvGridArea>
+          <SlickSection title="Trend Tv now" list={trendTV}></SlickSection>
+        </TrendTvGridArea>
         <MovieGridArea>
           <MovieSection popular={popular} upcomings={upcomings}></MovieSection>
         </MovieGridArea>
         <TvOnairGridArea>
-          <TvSection title="TV OnAir" tvList={tvOnAir}></TvSection>
+          <SlickSection title="TV OnAir" list={tvOnAir}></SlickSection>
         </TvOnairGridArea>
         <TvPopularGridArea>
-          <TvSection title="TV popular" tvList={tvpopular}></TvSection>
+          <SlickSection title="TV popular" list={tvpopular}></SlickSection>
         </TvPopularGridArea>
       </HomeContainer>
     </Page>
@@ -76,14 +87,16 @@ function MovieSection({ popular, upcomings }) {
 }
 
 Home.getInitialProps = async function() {
-  const responseTrend = await getCombineTrendingMovieAndTv()
+  const responseTrendMovie = await getTrending("movie")
+  const responseTrendTV = await getTrending("tv")
   const responsePopular = await getMoviePopular()
   const responseUpcoming = await getMovieUpcoming()
   const responseTVOnAir = await getMovieTvOnAir()
   const responseTvPopular = await getMovieTvPopular()
 
   return {
-    responseTrend,
+    trendMovie: mapMovietrend(responseTrendMovie.results),
+    trendTV: mapMovietrend(responseTrendTV.results),
     popular: mapMovieData(responsePopular.results),
     upcomings: mapMovieData(responseUpcoming.results),
     tvOnAir: mapMovieTV(responseTVOnAir.results),
@@ -106,6 +119,15 @@ function mapMovieTV(data: IMovieTv[]): MovieCard[] {
     original_name: val.original_name,
     vote_average: val.vote_average,
     date: val.first_air_date,
+  }))
+}
+
+function mapMovietrend(data: IMovieTrending[]): MovieCard[] {
+  return data.map(val => ({
+    poster_path: val.poster_path,
+    original_name: val.original_title ? val.original_title : val.original_name,
+    vote_average: val.vote_average,
+    date: val.first_air_date ? val.first_air_date : val.release_date,
   }))
 }
 
