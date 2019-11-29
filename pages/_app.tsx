@@ -1,5 +1,14 @@
 import React from "react"
 import App from "next/app"
+import Page from "layouts"
+import NProgress from "nprogress"
+import Router from "next/router"
+
+Router.events.on("routeChangeStart", url => {
+  NProgress.start()
+})
+Router.events.on("routeChangeComplete", () => NProgress.done())
+Router.events.on("routeChangeError", () => NProgress.done())
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -16,7 +25,11 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
+    return (
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    )
   }
 }
 
