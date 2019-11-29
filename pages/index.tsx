@@ -1,8 +1,7 @@
 import { isEmpty } from "common"
 import Loading from "components/loader"
 import Movie from "components/movie"
-import SlickSection from "components/Slick"
-import Page from "layouts"
+import SlickSection from "components/slick"
 import React from "react"
 import {
   getMoviePopular,
@@ -57,7 +56,7 @@ const TvOnairGridArea = styled.div`
 
 const Home = ({ trendMovie, trendTV, popular, upcomings, tvOnAir, tvpopular }) => {
   return (
-    <Page>
+    <>
       <HomeContainer>
         <TrendGridArea>
           <SlickSection title="Trend Movie now" list={trendMovie}></SlickSection>
@@ -75,7 +74,7 @@ const Home = ({ trendMovie, trendTV, popular, upcomings, tvOnAir, tvpopular }) =
           <SlickSection title="TV popular" list={tvpopular}></SlickSection>
         </TvPopularGridArea>
       </HomeContainer>
-    </Page>
+    </>
   )
 }
 
