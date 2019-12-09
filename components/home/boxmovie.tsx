@@ -1,9 +1,9 @@
-import MovieSlick from "components/movieSlick"
+import ListSlider from "components/home/listSlider"
 import React from "react"
 import { MovieCard } from "services"
 import styled from "styled-components"
 
-interface ISlickSectionProp {
+interface IMovieProp {
   list: MovieCard[]
   title: string
 }
@@ -16,15 +16,15 @@ const BoxHeaderTitle = styled.div`
 margin 2em 0;
 `
 
-const SlickSection: React.FC<ISlickSectionProp> = ({ list, title }) => {
+const BoxMovie: React.FC<IMovieProp> = ({ list, title }) => {
   return (
     <div className="container">
       <BoxHeaderTitle>
         <TitleMovie>{title}</TitleMovie>
       </BoxHeaderTitle>
-      <MovieSlick movieList={list}></MovieSlick>
+      <ListSlider movieList={list}></ListSlider>
     </div>
   )
 }
 
-export default SlickSection
+export default BoxMovie

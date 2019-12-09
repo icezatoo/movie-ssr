@@ -1,3 +1,5 @@
+import { ProductionCompany, Genre, MovieVideos } from "services"
+
 export interface MenuList {
   label: string
   active: boolean
@@ -15,6 +17,7 @@ export interface CommonAPI<T> {
   total_results: number
   dates: Dates
   total_pages: number
+  id?: string
 }
 
 export interface ISlickModel {
@@ -27,4 +30,22 @@ export interface ITabModel {
   label: string
   icon?: string
   key: string | number
+}
+
+export interface IDetailModel {
+  backdropPath: string
+  genres: Genre[]
+  id: string
+  originalLanguage: string
+  name: string
+  overview: string
+  popularity: number
+  posterPath: string
+  productionCompanies: ProductionCompany[]
+  date: string
+  runtime: number
+  status: string
+  voteAverage: number
+  voteCount: number
+  video: MovieVideos[]
 }

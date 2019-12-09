@@ -1,7 +1,7 @@
 import axios from "axios"
 import { CommonAPI } from "common"
 import { apiEndPoint, apiKey, imageEndPoint } from "constant"
-import { MediaType, IMovie, IMovieTrending, IMovieTv } from "./movie"
+import { MediaType, IMovie, IMovieTrending, IMovieTv, IMovieDetail, MovieVideos } from "./movie"
 
 export const getMovieUpcoming = async (page = 1) => {
   return await axios
@@ -31,4 +31,16 @@ export const getTrending = async (mediaType: MediaType = "all", time: string = "
   return await axios
     .get<CommonAPI<IMovieTrending>>(`${apiEndPoint}/trending/${mediaType}/${time}?api_key=${apiKey}`)
     .then(response => response.data)
+}
+
+export const getMovieDetail = async (id: number) => {
+  return await axios
+    .get<IMovieDetail>(`${apiEndPoint}/movie/${id}?api_key=${apiKey}&language=en-US`)
+    .then(response => response.data)
+}
+
+export const getMovieVideos = async (id: number) => {
+  return await axios
+    .get<CommonAPI<MovieVideos>>(`${apiEndPoint}/movie/${id}/videos?api_key=${apiKey}&language=en-US`)
+    .then(response => response.data.results)
 }

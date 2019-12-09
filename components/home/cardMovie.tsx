@@ -1,4 +1,5 @@
 import ImagePoster from "components/imagePoster"
+import Link from "next/link"
 import React from "react"
 import { MovieCard } from "services"
 import styled from "styled-components"
@@ -13,6 +14,7 @@ const CardMovieContent = styled.div`
 const CardMovieImage = styled.div`
   height: 300px;
   position: relative;
+  cursor: pointer;
 `
 
 const Title = styled.h3`
@@ -34,10 +36,16 @@ const AverageTitle = styled.span`
 `
 
 const CardMovie = ({ movie }: CardMovieProps) => {
+  const hrefLink = movie.mode === "Movie" ? "/movie/[id]" : "/tv/[id]"
+  const asLink = movie.mode === "Movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`
   return (
     <CardMovieContent>
       <CardMovieImage>
-        <ImagePoster alt={movie.original_name} path={movie.poster_path} />
+        <Link href={hrefLink} as={asLink}>
+          <a>
+            <ImagePoster alt={movie.original_name} path={movie.poster_path} />
+          </a>
+        </Link>
       </CardMovieImage>
       <Title title={movie.original_name}>{movie.original_name}</Title>
       <CardDetail>

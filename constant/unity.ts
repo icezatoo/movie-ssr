@@ -10,6 +10,8 @@ export const apiKey: string = "545355355a5f3d21e30cf2751d3ac464"
 
 export const imageEndPoint: string = "https://image.tmdb.org/t/p"
 
+export const BASE_EMBED_URL = "https://www.youtube.com/embed/"
+
 export const settings = {
   dots: false,
   infinite: true,

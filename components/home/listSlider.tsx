@@ -4,9 +4,9 @@ import Slider from "react-slick"
 import { MovieCard } from "services"
 import CardMovie from "./cardMovie"
 
-type MovieSlickProps = { movieList: MovieCard[] }
+type ListSliderProps = { movieList: MovieCard[] }
 
-const MovieSlick = ({ movieList }: MovieSlickProps) => (
+const ListSlider = ({ movieList }: ListSliderProps) => (
   <Slider {...settings}>
     {movieList.map((val, index) => (
       <CardMovie key={index} movie={val}></CardMovie>
@@ -14,4 +14,4 @@ const MovieSlick = ({ movieList }: MovieSlickProps) => (
   </Slider>
 )
 
-export default MovieSlick
+export default ListSlider
