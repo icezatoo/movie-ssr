@@ -1,4 +1,4 @@
-import { ProductionCompany, Genre, MovieVideos } from "services"
+import { ProductionCompany, Genre, MovieVideos, Cast, Crew } from "services"
 
 export interface MenuList {
   label: string
@@ -42,10 +42,13 @@ export interface IDetailModel {
   popularity: number
   posterPath: string
   productionCompanies: ProductionCompany[]
+  homepage: string
   date: string
   runtime: number
   status: string
   voteAverage: number
   voteCount: number
   video: MovieVideos[]
+  cast: Cast[]
+  crew: Crew[]
 }

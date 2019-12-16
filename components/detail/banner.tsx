@@ -1,18 +1,16 @@
-import { IDetailModel, isEmpty } from "common"
-import React, { useState } from "react"
+import { IDetailModel, isEmpty, convertMinToHour, getGenres } from "common"
+import Button from "components/button"
+import React from "react"
 import { Genre } from "services"
 import styled from "styled-components"
-import Button from "components/button"
-import Model from "components/modal"
-import Video from "components/Video"
 
 const BannerMovie = styled.div`
-  height: 45rem;
+  height: 40rem;
   background: red;
   position: relative;
   background-image: url('${props => props.url}');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top center;
   background-size: cover;
   will-change: opacity;
   transition: filter 1s;
@@ -69,19 +67,10 @@ const BoxAction = styled.div`
 
 interface IBannerProp {
   movie: IDetailModel
+  showDialog: () => void
 }
 
-const Banner: React.FC<IBannerProp> = ({ movie }) => {
-  const [isShow, setShowDialog] = useState(false)
-
-  const showDialog = () => {
-    setShowDialog(true)
-  }
-
-  const closeDialog = () => {
-    setShowDialog(false)
-  }
-
+const Banner: React.FC<IBannerProp> = ({ movie, showDialog }) => {
   return (
     <BannerMovie url={movie.backdropPath}>
       <BannerContent>
@@ -93,7 +82,8 @@ const Banner: React.FC<IBannerProp> = ({ movie }) => {
         </div>
         <Title>{movie.name}</Title>
         <div>
-          <TextRunTime>{movie.runtime}min</TextRunTime> | <TextGenres>{getGenres(movie.genres)}</TextGenres>
+          <TextRunTime>{convertMinToHour(movie.runtime)}</TextRunTime> |{" "}
+          <TextGenres>{getGenres(movie.genres)}</TextGenres>
         </div>
         <BoxAction>
           <Button width="15em" height="3em" onClick={showDialog}>
@@ -101,18 +91,8 @@ const Banner: React.FC<IBannerProp> = ({ movie }) => {
           </Button>
         </BoxAction>
       </BannerContent>
-      <Model show={isShow} close={closeDialog} title="Play Trailer">
-        {isShow && <Video id={movie.video[0].key}></Video>}
-      </Model>
     </BannerMovie>
   )
-}
-
-function getGenres(genres: Genre[]) {
-  if (!isEmpty(genres)) {
-    return genres.map(val => val.name).join(", ")
-  }
-  return "General"
 }
 
 export default Banner

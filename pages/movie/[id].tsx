@@ -1,7 +1,7 @@
 import Detail from "components/detail"
 import { imageEndPoint } from "constant"
 import React from "react"
-import { getMovieDetail, getMovieVideos } from "services"
+import { getMovieCredits, getMovieDetail, getMovieVideos } from "services"
 
 const MovieDetail = movie => {
   return <Detail movieDetail={movie}></Detail>
@@ -10,6 +10,8 @@ const MovieDetail = movie => {
 MovieDetail.getInitialProps = async function({ query }) {
   const movie = await getMovieDetail(query.id)
   const videos = await getMovieVideos(query.id)
+  const credits = await getMovieCredits(query.id)
+
   return {
     backdropPath: `${imageEndPoint}/original${movie.backdrop_path}`,
     id: movie.id,
@@ -26,6 +28,9 @@ MovieDetail.getInitialProps = async function({ query }) {
     voteCount: movie.vote_count,
     genres: movie.genres,
     video: videos,
+    homepage: movie.homepage,
+    cast: credits.cast.filter((val, index) => val.profile_path && index < 10),
+    crew: credits.crew,
   }
 }
 
