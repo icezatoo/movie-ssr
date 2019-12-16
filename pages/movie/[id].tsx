@@ -29,8 +29,8 @@ MovieDetail.getInitialProps = async function({ query }) {
     genres: movie.genres,
     video: videos,
     homepage: movie.homepage,
-    cast: credits.cast.filter((val, index) => val.profile_path && index < 10),
-    crew: credits.crew,
+    cast: credits.cast.filter((val, index) => val.profile_path),
+    crew: credits.crew.filter((val, index) => val.profile_path),
   }
 }
 

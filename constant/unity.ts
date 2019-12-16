@@ -18,7 +18,7 @@ export const settings = {
   lazyLoad: true,
   speed: 1000,
   slidesToShow: 5,
-  slidesToScroll: 1,
+  slidesToScroll: 3,
   initialSlide: 0,
   autoplay: true,
   autoplaySpeed: 2000,
