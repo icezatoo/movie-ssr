@@ -135,6 +135,7 @@ export interface Cast {
   name: string
   order: number
   profile_path: string
+  isHover?: boolean
 }
 
 export interface Crew {
@@ -145,6 +146,7 @@ export interface Crew {
   job: string
   name: string
   profile_path: string
+  isHover?: boolean
 }
 
 export interface MovieCredits {

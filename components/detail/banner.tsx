@@ -1,11 +1,12 @@
-import { IDetailModel, isEmpty, convertMinToHour, getGenres } from "common"
+import { IDetailModel, isEmpty } from "common"
 import Button from "components/button"
+import ImagePoster from "components/imagePoster"
 import React from "react"
 import { Genre } from "services"
 import styled from "styled-components"
 
 const BannerMovie = styled.div`
-  height: 40rem;
+  height: 35rem;
   background: red;
   position: relative;
   background-image: url('${props => props.url}');
@@ -23,19 +24,29 @@ const BannerMovie = styled.div`
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
   }
 
 `
 
-const BannerContent = styled.div`
-  top: 30%;
-  left: 20%;
+const BannerMovieContent = styled.div`
   margin: auto;
-  display: flex;
   position: absolute;
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
   z-index: 2;
+`
+
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-gap: 1em;
+  padding: 3em;
+`
+
+const ContentDetail = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const Title = styled.h1`
@@ -44,55 +55,61 @@ const Title = styled.h1`
   font-size: 2.2rem;
 `
 
-const Text = styled.span`
-  margin: 0 20px;
-`
-const TextRunTime = styled.span`
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-right: 1rem;
-`
-
-const TextGenres = styled.span`
-  color: #9e9e9e;
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.5;
-  margin: 0 10px;
-`
-
-const BoxAction = styled.div`
-  margin: 3em 0;
+const TextOpacity = styled.span`
+  opacity: 0.6;
+  font-weight: 400;
 `
 
 interface IBannerProp {
   movie: IDetailModel
-  showDialog: () => void
+  showDialog: (movieID: string) => void
 }
 
 const Banner: React.FC<IBannerProp> = ({ movie, showDialog }) => {
   return (
     <BannerMovie url={movie.backdropPath}>
-      <BannerContent>
-        <div>
-          <span>{movie.date}</span>
-          <Text>
-            <i className="fas fa-star"></i> {movie.voteAverage}/10
-          </Text>
+      <BannerMovieContent>
+        <div className="container">
+          <ContentGrid>
+            <div>
+              <ImagePoster alt={movie.name} path={movie.posterPath} />
+            </div>
+            <BoxContentDetail movie={movie} showDialog={() => showDialog(movie.video[0].key)}></BoxContentDetail>
+          </ContentGrid>
         </div>
-        <Title>{movie.name}</Title>
-        <div>
-          <TextRunTime>{convertMinToHour(movie.runtime)}</TextRunTime> |{" "}
-          <TextGenres>{getGenres(movie.genres)}</TextGenres>
-        </div>
-        <BoxAction>
-          <Button width="15em" height="3em" onClick={showDialog}>
-            WATCH TRAILER
-          </Button>
-        </BoxAction>
-      </BannerContent>
+      </BannerMovieContent>
     </BannerMovie>
   )
+}
+
+const BoxContentDetail = ({ movie, showDialog }) => (
+  <ContentDetail>
+    <Title>
+      {movie.name} <TextOpacity>({getYear(movie.date)})</TextOpacity>
+    </Title>
+    <h3>Overview</h3>
+    <article className="overview">{movie.overview}</article>
+    <h3>
+      Genres : <TextOpacity>{getGenres(movie.genres)}</TextOpacity>
+    </h3>
+    <Button width="15em" height="3em" onClick={showDialog}>
+      WATCH TRAILER
+    </Button>
+  </ContentDetail>
+)
+
+function getYear(date: string) {
+  if (date) {
+    return date.split("-")[0]
+  }
+  return ""
+}
+
+export function getGenres(genres: Genre[]) {
+  if (!isEmpty(genres)) {
+    return genres.map(val => val.name).join(", ")
+  }
+  return "General"
 }
 
 export default Banner

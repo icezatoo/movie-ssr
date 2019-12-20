@@ -1,5 +1,3 @@
-import { Genre } from "services"
-
 export function isEmpty(value: any) {
   if (value === null || value === undefined) {
     return true
@@ -11,10 +9,3 @@ export function isEmpty(value: any) {
 }
 
 export const convertMinToHour = n => `0${(n / 60) ^ 0}`.slice(-2) + ":" + ("0" + (n % 60)).slice(-2)
-
-export function getGenres(genres: Genre[]) {
-  if (!isEmpty(genres)) {
-    return genres.map(val => val.name).join(", ")
-  }
-  return "General"
-}

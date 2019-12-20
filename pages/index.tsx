@@ -10,7 +10,6 @@ import {
   getMovieUpcoming,
   getTrending,
   IMovie,
-  IMovieTrending,
   IMovieTv,
   MovieCard,
 } from "services"
@@ -87,16 +86,25 @@ const MovieSectionBox = ({ moviedata }): any => {
 }
 
 Home.getInitialProps = async function() {
-  const responseTrendMovie = await getTrending("movie")
-  const responseTrendTV = await getTrending("tv")
-  const responsePopular = await getMoviePopular()
-  const responseUpcoming = await getMovieUpcoming()
-  const responseTVOnAir = await getMovieTvOnAir()
-  const responseTvPopular = await getMovieTvPopular()
+  const [
+    responseTrendMovie,
+    responseTrendTV,
+    responsePopular,
+    responseUpcoming,
+    responseTVOnAir,
+    responseTvPopular,
+  ] = await Promise.all([
+    getTrending("movie"),
+    getTrending("tv"),
+    getMoviePopular(),
+    getMovieUpcoming(),
+    getMovieTvOnAir(),
+    getMovieTvPopular(),
+  ])
 
   return {
-    trendMovie: mapMovietrend(responseTrendMovie.results),
-    trendTV: mapMovietrend(responseTrendTV.results),
+    trendMovie: mapMovieTrend(responseTrendMovie.results),
+    trendTV: mapMovieTrend(responseTrendTV.results),
     popular: mapMovieData(responsePopular.results),
     upcomings: mapMovieData(responseUpcoming.results),
     tvOnAir: mapMovieTV(responseTVOnAir.results),
@@ -126,7 +134,7 @@ function mapMovieTV(data: IMovieTv[]): MovieCard[] {
   }))
 }
 
-function mapMovietrend(data: IMovieTrending[]): MovieCard[] {
+function mapMovieTrend(data: any[]): MovieCard[] {
   return data.map(val => ({
     id: val.id,
     poster_path: val.poster_path,

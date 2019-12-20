@@ -1,9 +1,8 @@
 import { IDetailModel } from "common"
 import React, { useState } from "react"
 import Banner from "./banner"
-import BoxDetail from "./boxDetail"
+import Description from "./description"
 import ModelVideo from "./modelVideo"
-import "./boxdetail.scss"
 
 interface IDetailProp {
   movieDetail: IDetailModel
@@ -11,20 +10,23 @@ interface IDetailProp {
 
 const Detail: React.FC<IDetailProp> = ({ movieDetail }) => {
   const [isShow, setShowDialog] = useState(false)
+  const [videoID, setVideoID] = useState("")
 
-  const showDialog = () => {
+  const showDialog = movieID => {
+    setVideoID(movieID)
     setShowDialog(true)
   }
 
   const closeDialog = () => {
     setShowDialog(false)
+    setVideoID("")
   }
 
   return (
     <>
-      <Banner movie={movieDetail} showDialog={showDialog}></Banner>
-      <BoxDetail movie={movieDetail}></BoxDetail>
-      <ModelVideo showDialog={isShow} videoID={movieDetail.video[0].key} closeModel={closeDialog}></ModelVideo>
+      <Banner movie={movieDetail} showDialog={movie => showDialog(movie)}></Banner>
+      <Description movie={movieDetail}></Description>
+      <ModelVideo showDialog={isShow} videoID={videoID} closeModel={closeDialog}></ModelVideo>
     </>
   )
 }

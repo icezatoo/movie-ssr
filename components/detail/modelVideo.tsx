@@ -1,6 +1,8 @@
-import React from "react"
 import Model from "components/modal"
-import Video from "components/video"
+import dynamic from "next/dynamic"
+import React from "react"
+
+const Video = dynamic(() => import("components/video"))
 
 interface IModelVideoProp {
   videoID: string
