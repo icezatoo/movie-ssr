@@ -1,12 +1,11 @@
-import { IDetailModel, isEmpty } from "common"
+import { IDetailModel, isEmpty, Genre } from "common"
 import Button from "components/button"
 import ImagePoster from "components/imagePoster"
 import React from "react"
-import { Genre } from "services"
 import styled from "styled-components"
 
 const BannerMovie = styled.div`
-  height: 35rem;
+  height: 40rem;
   background: red;
   position: relative;
   background-image: url('${props => props.url}');

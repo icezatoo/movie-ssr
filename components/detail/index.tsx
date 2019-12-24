@@ -25,7 +25,7 @@ const Detail: React.FC<IDetailProp> = ({ movieDetail }) => {
   return (
     <>
       <Banner movie={movieDetail} showDialog={movie => showDialog(movie)}></Banner>
-      <Description movie={movieDetail}></Description>
+      <Description movie={movieDetail} showDialog={movie => showDialog(movie)}></Description>
       <ModelVideo showDialog={isShow} videoID={videoID} closeModel={closeDialog}></ModelVideo>
     </>
   )

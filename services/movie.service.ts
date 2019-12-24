@@ -1,7 +1,7 @@
 import axios from "axios"
-import { CommonAPI } from "common"
-import { apiEndPoint, apiKey, imageEndPoint } from "constant"
-import { MediaType, IMovie, IMovieTrending, IMovieTv, IMovieDetail, MovieVideos, MovieCredits } from "./movie"
+import { CommonAPI, MovieVideos, MovieCredits } from "common"
+import { apiEndPoint, apiKey } from "constant"
+import { IMovie, IMovieDetail, IMovieTrending, IMovieTv, MediaType } from "./movie"
 
 export const getMovieUpcoming = async (page = 1) => {
   return await axios

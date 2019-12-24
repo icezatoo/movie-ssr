@@ -36,8 +36,8 @@ const AverageTitle = styled.span`
 `
 
 const CardMovie = ({ movie }: CardMovieProps) => {
-  const hrefLink = movie.mode === "Movie" ? "/detail/[id]" : "/tv/[id]"
-  const asLink = movie.mode === "Movie" ? `/detail/${movie.id}` : `/tv/${movie.id}`
+  const hrefLink = movie.mode === "Movie" ? "/detail/[id]" : "/detail-tv/[id]"
+  const asLink = movie.mode === "Movie" ? `/detail/${movie.id}` : `/detail-tv/${movie.id}`
   return (
     <CardMovieContent>
       <CardMovieImage>

@@ -1,7 +1,7 @@
 import { imageEndPoint } from "constant"
 import React from "react"
-import { Cast } from "services"
 import styled from "styled-components"
+import { Cast } from "common"
 
 interface IActorProp {
   actorList: Cast[]

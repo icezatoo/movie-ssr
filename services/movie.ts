@@ -1,3 +1,5 @@
+import { Genre, ProductionCompany, Cast, Crew } from "common"
+
 export type MediaType = "all" | "movie" | "tv" | "person"
 
 export interface IMovieTrending {
@@ -63,18 +65,6 @@ export interface MovieCard {
 
 type Mode = "TV" | "Movie"
 
-export interface Genre {
-  id: number
-  name: string
-}
-
-export interface ProductionCompany {
-  id: number
-  logo_path: string
-  name: string
-  origin_country: string
-}
-
 export interface ProductionCountry {
   iso_3166_1: string
   name: string
@@ -111,46 +101,6 @@ export interface IMovieDetail {
   video: boolean
   vote_average: number
   vote_count: number
-  cast: Cast[]
-  crew: Crew[]
-}
-
-export interface MovieVideos {
-  id: string
-  iso_639_1: string
-  iso_3166_1: string
-  key: string
-  name: string
-  site: string
-  size: number
-  type: string
-}
-
-export interface Cast {
-  cast_id: number
-  character: string
-  credit_id: string
-  gender: number
-  id: number
-  name: string
-  order: number
-  profile_path: string
-  isHover?: boolean
-}
-
-export interface Crew {
-  credit_id: string
-  department: string
-  gender: number
-  id: number
-  job: string
-  name: string
-  profile_path: string
-  isHover?: boolean
-}
-
-export interface MovieCredits {
-  id: number
   cast: Cast[]
   crew: Crew[]
 }

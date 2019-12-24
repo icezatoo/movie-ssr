@@ -13,8 +13,6 @@ import {
   IMovieTv,
   MovieCard,
 } from "services"
-import "slick-carousel/slick/slick-theme.css"
-import "slick-carousel/slick/slick.css"
 import styled from "styled-components"
 
 interface IHomeProp {

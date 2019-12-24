@@ -3,6 +3,8 @@ import App from "next/app"
 import Page from "layouts"
 import NProgress from "nprogress"
 import Router from "next/router"
+import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick.css"
 
 Router.events.on("routeChangeStart", url => {
   NProgress.start()

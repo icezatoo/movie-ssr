@@ -2,30 +2,30 @@ import { MovieCredits, MovieVideos } from "common"
 import Detail from "components/detail"
 import { imageEndPoint } from "constant"
 import React from "react"
-import { getMovieCredits, getMovieDetail, getMovieVideos, IMovieDetail } from "services"
+import { getTVcredits, getTVDetail, getTVvideo, IMovieDetailTV } from "services"
 
-const MovieDetail = movie => {
+const TVDetail = movie => {
   return <Detail movieDetail={movie}></Detail>
 }
 
-MovieDetail.getInitialProps = async function({ query }) {
-  const [movie, videos, credits] = await Promise.all<IMovieDetail, MovieVideos[], MovieCredits>([
-    getMovieDetail(query.id),
-    getMovieVideos(query.id),
-    getMovieCredits(query.id),
+TVDetail.getInitialProps = async function({ query }) {
+  const [movie, videos, credits] = await Promise.all<IMovieDetailTV, MovieVideos[], MovieCredits>([
+    getTVDetail(query.id),
+    getTVvideo(query.id),
+    getTVcredits(query.id),
   ])
 
   return {
     backdropPath: `${imageEndPoint}/original${movie.backdrop_path}`,
     id: movie.id,
     originalLanguage: movie.original_language,
-    name: movie.original_title,
+    name: movie.original_name,
     overview: movie.overview,
     popularity: movie.popularity,
     posterPath: movie.poster_path,
     productionCompanies: movie.production_companies,
-    date: movie.release_date,
-    runtime: movie.runtime,
+    date: movie.first_air_date,
+    runtime: [],
     status: movie.status,
     voteAverage: movie.vote_average,
     voteCount: movie.vote_count,
@@ -37,4 +37,4 @@ MovieDetail.getInitialProps = async function({ query }) {
   }
 }
 
-export default MovieDetail
+export default TVDetail
