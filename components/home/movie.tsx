@@ -3,7 +3,7 @@ import Tabs from "components/tab"
 import React, { useEffect, useState } from "react"
 import { IMovie } from "services"
 import styled from "styled-components"
-import MovieSlick from "../movieSlick"
+import ListSlider from "./listSlider"
 
 type MovieProps = { popular: IMovie[]; upcomings: IMovie[] }
 
@@ -46,7 +46,7 @@ const MovieSection = ({ popular, upcomings }: MovieProps) => {
           <TitleMovie>Movie</TitleMovie>
           <Tabs items={tabList} currentTab={previousTab} onChange={setPreviousTab}></Tabs>
         </BoxHeaderTitle>
-        <MovieSlick movieList={movieList} />
+        <ListSlider movieList={movieList} />
       </div>
     </>
   )

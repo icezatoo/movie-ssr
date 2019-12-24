@@ -1,3 +1,5 @@
+import { Genre, ProductionCompany, Cast, Crew } from "common"
+
 export type MediaType = "all" | "movie" | "tv" | "person"
 
 export interface IMovieTrending {
@@ -53,8 +55,52 @@ export interface IMovie {
 }
 
 export interface MovieCard {
+  id: number
   poster_path: string
   original_name: string
   vote_average: number
   date: string
+  mode: Mode
+}
+
+type Mode = "TV" | "Movie"
+
+export interface ProductionCountry {
+  iso_3166_1: string
+  name: string
+}
+
+export interface SpokenLanguage {
+  iso_639_1: string
+  name: string
+}
+
+export interface IMovieDetail {
+  adult: boolean
+  backdrop_path: string
+  belongs_to_collection?: any
+  budget: number
+  genres: Genre[]
+  homepage: string
+  id: number
+  imdb_id: string
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path?: any
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
+  release_date: string
+  revenue: number
+  runtime: number
+  spoken_languages: SpokenLanguage[]
+  status: string
+  tagline: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+  cast: Cast[]
+  crew: Crew[]
 }

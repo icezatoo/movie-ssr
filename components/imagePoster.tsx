@@ -15,11 +15,13 @@ const ImageContent = styled.img`
 
 const ImagePoster = ({ alt, path }) => (
   <ImageContent
+    loading="lazy"
     srcSet={`${imageEndPoint}/w154${path} 154w,
              ${imageEndPoint}/w185${path} 185w,
              ${imageEndPoint}/w342${path} 342w,
              ${imageEndPoint}/w500${path} 500w`}
     src={`${imageEndPoint}/w500${path}`}
+    sizes="(max-width: 1380px) 100vw, 500px"
     alt={alt}
   />
 )
